@@ -6,7 +6,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { DialogActions } from "@mui/material";
 import { Snackbar, Alert } from "@mui/material";
 
-export default function ExpandPhoto({ collage, index }) {
+export default function ExpandPhoto({ collage }) {
   const [openDialog, setOpenDialog] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarText, setSnackbarText] = useState("");

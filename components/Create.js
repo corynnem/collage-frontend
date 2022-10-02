@@ -28,7 +28,7 @@ export default function Create({ openDialog, setOpenDialog, allCollages }) {
     setOpenSnackbar(true);
   };
 
-  const snackbarClose = (event, reason) => {
+  const snackbarClose = (reason) => {
     if (reason === "clickaway") {
       return;
     }
