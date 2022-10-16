@@ -33,7 +33,7 @@ export default function ExpandPhoto({ collage }) {
   };
 
   const remove = () => {
-    fetch(`${process.env.NEXT_PUBLIC_API_UR}/collage/${collage.id}`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/collage/${collage.id}`, {
       method: "DELETE",
     })
       .then(() => snackbarOpen())
