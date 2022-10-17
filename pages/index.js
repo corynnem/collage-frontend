@@ -19,7 +19,7 @@ export default function Home() {
     allCollages();
   }, []);
 
-  console.log(collages, process.env.NEXT_PUBLIC_URL);
+  console.log(collages, process.env.NEXT_PUBLIC_API_URL);
 
   return (
     <Paper
