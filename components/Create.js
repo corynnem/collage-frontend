@@ -11,6 +11,7 @@ import { Snackbar, Alert } from "@mui/material";
 export default function Create({ openDialog, setOpenDialog, allCollages }) {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarText, setSnackbarText] = useState("");
+  const [inputChanged, setInputChanged] = useState(false);
   const [photo, setPhoto] = useState({});
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -84,6 +85,11 @@ export default function Create({ openDialog, setOpenDialog, allCollages }) {
     dialogClose();
   };
 
+  const onFileChange = (e) => {
+    setPhoto(e.target.files[0]);
+    setInputChanged(true);
+  };
+
   return (
     <div>
       <Button
@@ -107,16 +113,18 @@ export default function Create({ openDialog, setOpenDialog, allCollages }) {
         </DialogTitle>
         <DialogContent style={{ backgroundColor: "#290025" }}>
           <DialogContentText id="alert-dialog-description">
+            <br />
             <Button
               variant="contained"
               component="label"
               style={{ backgroundColor: "#35012c", color: "#6e5774" }}
             >
-              Upload File
+              {inputChanged ? "Files Added" : "Upload Files"}
               <input
                 type="file"
+                multiple
                 hidden
-                onChange={(e) => setPhoto(e.target.files[0])}
+                onChange={(e) => onFileChange(e)}
               />
             </Button>
           </DialogContentText>
