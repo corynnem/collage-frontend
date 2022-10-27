@@ -2,11 +2,11 @@ import Collages from "../components/Collages";
 import Create from "../components/Create";
 import { useState, useEffect } from "react";
 import { Paper } from "@mui/material";
-import styles from "../styles/Home.module.css";
 
 export default function Home() {
   const [collages, setCollages] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
+  const [reload, setReload] = useState(false);
 
   const allCollages = () => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/collage/all`)
@@ -17,7 +17,8 @@ export default function Home() {
 
   useEffect(() => {
     allCollages();
-  }, []);
+    setReload(false);
+  }, [reload]);
 
   console.log(collages, process.env.NEXT_PUBLIC_API_URL);
 
@@ -45,6 +46,8 @@ export default function Home() {
           openDialog={openDialog}
           setOpenDialog={setOpenDialog}
           allCollages={allCollages}
+          reload={reload}
+          setReload={setReload}
         />
         <Paper
           style={{
@@ -61,7 +64,7 @@ export default function Home() {
             collages.map((collage, i) => {
               return (
                 <div key={i}>
-                  <Collages collage={collage} index={i} />
+                  <Collages collage={collage} index={i} setReload={setReload} />
                 </div>
               );
             })

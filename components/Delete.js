@@ -6,7 +6,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { DialogActions } from "@mui/material";
 import { Snackbar, Alert } from "@mui/material";
 
-export default function ExpandPhoto({ collage }) {
+export default function ExpandPhoto({ collage, expandDialogClose, setReload }) {
   const [openDialog, setOpenDialog] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarText, setSnackbarText] = useState("");
@@ -39,12 +39,22 @@ export default function ExpandPhoto({ collage }) {
       .then(() => snackbarOpen())
       .catch(() => setSnackbarText("Collage could not be deleted"));
     dialogClose();
+    expandDialogClose();
+    setReload(true);
   };
 
   return (
     <div>
-      <Button onClick={dialogOpen} style={{ color: "#6e5774", margin: "10px" }}>
-        {/* <DeleteIcon style={{ height: "20px" }} /> */}
+      <Button
+        onClick={dialogOpen}
+        style={{
+          color: "#6e5774",
+          marginTop: "-25px",
+          marginBotton: "-25px",
+          float: "right",
+        }}
+      >
+        <DeleteIcon style={{ height: "30px" }} />
       </Button>
       <Dialog
         open={openDialog}

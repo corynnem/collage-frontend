@@ -4,7 +4,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import Delete from "./Delete";
 
-export default function ExpandPhoto({ collage, index }) {
+export default function ExpandPhoto({ collage, index, setReload }) {
   const [openDialog, setOpenDialog] = useState(false);
 
   const dialogOpen = () => {
@@ -17,14 +17,12 @@ export default function ExpandPhoto({ collage, index }) {
 
   return (
     <div>
-      <Delete collage={collage} />
-
       <Button onClick={dialogOpen} style={{ color: "#6e5774", margin: "10px" }}>
         <video
           muted
           autoPlay
           loop
-          style={{ height: "300px" }}
+          style={{ width: "200px" }}
           id={`video-${index}`}
         >
           <source src={collage.photoLink} type="video/mp4" />
@@ -38,11 +36,16 @@ export default function ExpandPhoto({ collage, index }) {
         style={{ backgroundColor: "inherit" }}
       >
         <DialogContent>
+          <Delete
+            collage={collage}
+            expandDialogClose={() => dialogClose()}
+            setReload={setReload}
+          />
           <video
             muted
             autoPlay
             loop
-            style={{ height: "80vh" }}
+            style={{ width: "70vw", maxWidth: "500px" }}
             id={`video-${index}`}
           >
             <source src={collage.photoLink} type="video/mp4" />

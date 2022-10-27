@@ -8,7 +8,12 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Input from "@mui/material/Input";
 import { Snackbar, Alert } from "@mui/material";
 
-export default function Create({ openDialog, setOpenDialog, allCollages }) {
+export default function Create({
+  openDialog,
+  setOpenDialog,
+  allCollages,
+  setReload,
+}) {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarText, setSnackbarText] = useState("");
   const [inputChanged, setInputChanged] = useState(false);
@@ -56,7 +61,7 @@ export default function Create({ openDialog, setOpenDialog, allCollages }) {
       .then(() => setSnackbarText("Collage added!"))
       .then(() => snackbarOpen())
       .catch(() => setSnackbarText("Failed to add collage"));
-    allCollages();
+    setReload(true);
   };
 
   const upload = () => {
@@ -81,7 +86,6 @@ export default function Create({ openDialog, setOpenDialog, allCollages }) {
         .then((json) => post(json))
         .catch(() => setSnackbarText("File type not supported"));
     }
-
     dialogClose();
   };
 

@@ -5,7 +5,7 @@ import DialogContent from "@mui/material/DialogContent";
 import Delete from "./Delete";
 import { Snackbar, Alert } from "@mui/material";
 
-export default function ExpandPhoto({ collage, index }) {
+export default function ExpandPhoto({ collage, index, setReload }) {
   const [openDialog, setOpenDialog] = useState(false);
 
   const dialogOpen = () => {
@@ -18,12 +18,11 @@ export default function ExpandPhoto({ collage, index }) {
 
   return (
     <div>
-      <Delete collage={collage} />
       <Button onClick={dialogOpen} style={{ color: "#6e5774", margin: "10px" }}>
         <img
           id={`image-${index}`}
           src={collage.photoLink}
-          style={{ height: "300px" }}
+          style={{ width: "200px" }}
         />
       </Button>
       <Dialog
@@ -33,11 +32,17 @@ export default function ExpandPhoto({ collage, index }) {
         aria-describedby="alert-dialog-description"
         style={{ backgroundColor: "inherit" }}
       >
-        <DialogContent>
+        <DialogContent style={{ backgroundColor: "inherit" }}>
+          <Delete
+            collage={collage}
+            color="disabled"
+            expandDialogClose={() => dialogClose()}
+            setReload={setReload}
+          />
           <img
             id={`image-${index}`}
             src={collage.photoLink}
-            style={{ height: "80vh" }}
+            style={{ width: "70vw", maxWidth: "500px" }}
           />
         </DialogContent>
       </Dialog>
