@@ -17,7 +17,7 @@ export default function Create({
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarText, setSnackbarText] = useState("");
   const [inputChanged, setInputChanged] = useState(false);
-  const [photo, setPhoto] = useState({});
+  const [photos, setPhotos] = useState({});
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [link, setLink] = useState("");
@@ -65,42 +65,39 @@ export default function Create({
   };
 
   const upload = () => {
-    const formdata = new FormData();
-    formdata.append("file", photo);
-    formdata.append("upload_preset", "fgzqgjzr");
-
-    if (photo.type === "video/mp4") {
-      fetch("https://api.cloudinary.com/v1_1/corynnemm/video/upload", {
-        method: "POST",
-        body: formdata,
-      })
-        .then((res) => res.json())
-        .then((json) => post(json))
-        .catch(() => setSnackbarText("File type not supported"));
-    } else {
-      fetch("https://api.cloudinary.com/v1_1/corynnemm/image/upload", {
-        method: "POST",
-        body: formdata,
-      })
-        .then((res) => res.json())
-        .then((json) => post(json))
-        .catch(() => setSnackbarText("File type not supported"));
-    }
+    photos.forEach((photo) => {
+      const formdata = new FormData();
+      formdata.append("file", photo);
+      formdata.append("upload_preset", "fgzqgjzr");
+      if (photo.type === "video/mp4") {
+        fetch("https://api.cloudinary.com/v1_1/corynnemm/video/upload", {
+          method: "POST",
+          body: formdata,
+        })
+          .then((res) => res.json())
+          .then((json) => post(json))
+          .catch(() => setSnackbarText("File type not supported"));
+      } else {
+        fetch("https://api.cloudinary.com/v1_1/corynnemm/image/upload", {
+          method: "POST",
+          body: formdata,
+        })
+          .then((res) => res.json())
+          .then((json) => post(json))
+          .catch(() => setSnackbarText("File type not supported"));
+      }
+    });
     dialogClose();
   };
 
   const onFileChange = (e) => {
-    setPhoto(e.target.files[0]);
+    setPhotos(e.target.files);
     setInputChanged(true);
   };
 
   return (
     <div>
-      <Button
-        // variant="outlined"
-        onClick={dialogOpen}
-        style={{ color: "#6e5774" }}
-      >
+      <Button onClick={dialogOpen} style={{ color: "#6e5774" }}>
         + Collage
       </Button>
       <Dialog
