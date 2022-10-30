@@ -20,8 +20,6 @@ export default function Home() {
     setReload(false);
   }, [reload]);
 
-  console.log(collages, process.env.NEXT_PUBLIC_API_URL);
-
   return (
     <Paper
       style={{

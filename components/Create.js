@@ -90,7 +90,7 @@ export default function Create({
   };
 
   const onFileChange = (e) => {
-    setPhotos(e.target.files);
+    setPhotos([...e.target.files]);
     setInputChanged(true);
   };
 
