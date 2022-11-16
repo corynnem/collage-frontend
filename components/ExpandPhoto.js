@@ -42,7 +42,7 @@ export default function ExpandPhoto({ collage, index, setReload }) {
           <img
             id={`image-${index}`}
             src={collage.photoLink}
-            style={{ width: "70vw", maxWidth: "500px" }}
+            style={{ width: "70vw", maxWidth: "400px" }}
           />
         </DialogContent>
       </Dialog>

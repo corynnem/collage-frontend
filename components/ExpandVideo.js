@@ -45,7 +45,7 @@ export default function ExpandPhoto({ collage, index, setReload }) {
             muted
             autoPlay
             loop
-            style={{ width: "70vw", maxWidth: "500px" }}
+            style={{ width: "70vw", maxWidth: "400px" }}
             id={`video-${index}`}
           >
             <source src={collage.photoLink} type="video/mp4" />
